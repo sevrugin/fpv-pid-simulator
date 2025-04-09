@@ -123,7 +123,7 @@ export default function App() {
                         You are welcome to use this simulator for educational purposes, and I hope you find it as enjoyable as I do!
                     </p>
                     <p>
-                        Feel free to fork and improve it <a href="https://github.com/sevrugin/fpv-pid-simulator" target="_blank">GitHub</a>
+                        Feel free to fork and improve it <a href="https://github.com/sevrugin/fpv-pid-simulator" target="_blank" className="text-blue-700 font-bold">GitHub</a>
                     </p>
                 </div>
                 <CopterView
