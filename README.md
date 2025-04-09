@@ -6,6 +6,8 @@ The PID system in this simulator works similarly to the ones used in platforms l
 
 You are welcome to use this simulator for educational purposes, and I hope you find it as enjoyable as I do!
 
+Feel free to test it out at [PID Simulator](https://sevrugin.github.io/fpv-pid-simulator/).
+
 ## Features
 - Adjust **P**, **I**, and **D** values using intuitive sliders.
 - Experiment with various **frame sizes** and **motor presets**.
