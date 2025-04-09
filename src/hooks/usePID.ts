@@ -6,34 +6,36 @@ export function usePID(p: number, i: number, d: number) {
     const PTERM_SCALE = 0.032029;
     const ITERM_SCALE = 0.244381;
     const DTERM_SCALE = 0.000529;
+
     const prevError = useRef(0);
     const integral = useRef(0);
     const lastTime = useRef(performance.now());
 
     return (target: number, current: number) => {
         const now = performance.now();
-        const dt = (now - lastTime.current) / 1000;
+        let dt = (now - lastTime.current) / 1000;
         lastTime.current = now;
 
-        const error = target - current;
-        integral.current += error * dt; // Integral term
-        if (integral.current > 250) {
-            integral.current = 250;
-        }
-        if (integral.current < -250) {
-            integral.current = -250;
-        }
+        // Безопасное значение dt
+        dt = Math.min(Math.max(dt, 0.001), 0.1);
 
-        const derivative = (error - prevError.current) / dt * 10; // Derivative term
+        const error = target - current;
+
+        // Интегральная часть с анти-виндапом
+        integral.current += error * dt;
+        integral.current = Math.max(-250, Math.min(250, integral.current));
+
+        // Производная часть
+        const derivative = (error - prevError.current) / dt * 10;
         prevError.current = error;
 
-        const output = p * PTERM_SCALE * error + i * ITERM_SCALE * integral.current + d * DTERM_SCALE * derivative;
-        if (output > 250) {
-            return 250;
-        }
-        if (output < -250) {
-            return -250;
-        }
-        return output;
+        // Выход
+        const output =
+            p * PTERM_SCALE * error +
+            i * ITERM_SCALE * integral.current +
+            d * DTERM_SCALE * derivative;
+
+        // Ограничение выхода
+        return Math.max(-250, Math.min(250, output));
     };
 }
