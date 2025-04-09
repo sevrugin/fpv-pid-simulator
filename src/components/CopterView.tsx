@@ -7,9 +7,10 @@ interface CopterViewProps {
     setCorrection: (value: number) => void; // Prop to update correction in App
     motor: { name: string; size: string; kv: number; weight: number; thrust: number };
     frameSize: number; // Optional prop for frame size
+    setIsCollecting: (value: boolean) => void; // Optional prop to control data collection
 }
 
-export const CopterView: React.FC<CopterViewProps> = ({ pid, setAngle, setCorrection, motor, frameSize }) => {
+export const CopterView: React.FC<CopterViewProps> = ({ pid, setAngle, setCorrection, motor, frameSize, setIsCollecting }) => {
     const angleRef = useRef(0); // Current angle of the copter
     const velocityRef = useRef(0); // Angular velocity
     const requestRef = useRef<number | null>(null);
@@ -19,13 +20,13 @@ export const CopterView: React.FC<CopterViewProps> = ({ pid, setAngle, setCorrec
     // Handle keyboard input for controlling throttle and angular velocity
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === "ArrowLeft") velocityRef.current = -25; // Decrease angular velocity
-            if (e.key === "ArrowRight") velocityRef.current = 25; // Increase angular velocity
+            if (e.key === "ArrowLeft") {setIsCollecting(true);velocityRef.current = -25;} // Decrease angular velocity
+            if (e.key === "ArrowRight") {setIsCollecting(true);velocityRef.current = 25;} // Increase angular velocity
         };
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, []);
+    }, [setIsCollecting]);
 
     // Animation loop for simulating the copter's behavior
     const previousTimeRef = React.useRef(0);
@@ -66,21 +67,24 @@ export const CopterView: React.FC<CopterViewProps> = ({ pid, setAngle, setCorrec
 
     return (
         <div className="w-full h-64 bg-blue-50 border rounded flex flex-col items-center justify-center">
-            <div className="relative -top-20 text-sm">
-                Press Left or Right Arrow to start moving
+            <div className="relative -top-20 text-sm justify-center">
+                Press Left or Right Arrow to start moving<br/>
+                Or Click on one of Motor
             </div>
             <div
                 className="w-40 h-2 bg-gray-800 relative"
                 style={{ transform: `rotate(${angleRef.current}deg)`, transition: 'transform 0.05s linear' }}
             >
                 <div
-                    className="absolute -left-3 -top-2 w-4 h-4 rounded-full flex items-center justify-center"
+                    className="absolute -left-3 -top-2 w-4 h-4 rounded-full flex items-center justify-center cursor-pointer"
                     style={{ backgroundColor: `rgba(255, 0, 0, 1)` }}
+                    onClick={() => {setIsCollecting(true);velocityRef.current = -25;}}
                 >
                 </div>
                 <div
-                    className="absolute -right-3 -top-2 w-4 h-4 rounded-full flex items-center justify-center"
+                    className="absolute -right-3 -top-2 w-4 h-4 rounded-full flex items-center justify-center cursor-pointer"
                     style={{ backgroundColor: `rgba(0, 255, 0, 1)` }}
+                    onClick={() => {setIsCollecting(true);velocityRef.current = 25;}}
                 >
                 </div>
             </div>

@@ -4,16 +4,19 @@ import { Stage, Layer, Line, Text } from "react-konva";
 interface PidGraphProps {
   angle: number;
   correction: number;
+  isCollecting: boolean;
+  setIsCollecting: (value: boolean) => void;
 }
 
-export const PidGraph: React.FC<PidGraphProps> = ({ angle, correction }) => {
+export const PidGraph: React.FC<PidGraphProps> = ({ angle, correction, isCollecting, setIsCollecting }) => {
   const [data, setData] = useState<{ time: number[]; angles: number[]; corrections: number[] }>({
     time: [],
     angles: [],
     corrections: [],
   });
-  const [isCollecting, setIsCollecting] = useState(false); // State to control data collection
+
   const timeRef = useRef(0);
+  const previousCollectiongState = useRef(isCollecting);
 
   const startCollectingData = () => {
     setData({ time: [], angles: [], corrections: [] }); // Reset data
@@ -21,19 +24,13 @@ export const PidGraph: React.FC<PidGraphProps> = ({ angle, correction }) => {
     setIsCollecting(true); // Start collecting data
   };
 
-  // start collecting data if left or right arrow pressed
   useEffect(() => {
-      const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
-          startCollectingData();
-      }
-      };
-
-      window.addEventListener("keydown", handleKeyDown);
-      return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
-  useEffect(() => {
+    // Check if the collecting state has changed
+    if (isCollecting && !previousCollectiongState.current) {
+      timeRef.current = 0; // Reset time when starting collection
+      setData({ time: [], angles: [], corrections: [] }); // Reset data
+    }
+    previousCollectiongState.current = isCollecting; // Update the previous collection state
     if (!isCollecting) return;
     const interval = setInterval(() => {
       timeRef.current += 1;
@@ -55,7 +52,7 @@ export const PidGraph: React.FC<PidGraphProps> = ({ angle, correction }) => {
       });
       return () => clearInterval(interval);
     }, 1000); // Collect data every 10ms
-  }, [angle, correction, isCollecting]);
+  }, [angle, correction, isCollecting, setIsCollecting]);
 
   const anglePoints = data.angles.map((value, index) => [index*5+50, 300 - value*4]).flat();
   const correctionPoints = data.corrections.map((value, index) => [index*5+50, 300 - value * 100]).flat();

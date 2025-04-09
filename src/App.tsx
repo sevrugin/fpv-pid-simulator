@@ -96,6 +96,7 @@ export default function App() {
     const [correction, setCorrection] = useState(0);
     const [motorIndex, setMotorIndex] = useState(0);
     const [frameSize, setFrameSize] = useState(7);
+    const [isCollecting, setIsCollecting] = useState(false); // State to control data collection
 
     return (
         <div className="flex flex-col md:flex-row h-screen p-4 gap-4">
@@ -128,10 +129,16 @@ export default function App() {
                     setCorrection={setCorrection}
                     motor={motorPresets[motorIndex]}
                     frameSize={frameSize}
+                    setIsCollecting={setIsCollecting} // Pass the setIsCollecting function to CopterView
                 />
             </div>
             <div className="md:w-1/3">
-                <PidGraph angle={angle} correction={correction} />            </div>
+                <PidGraph
+                    angle={angle}
+                    correction={correction}
+                    isCollecting={isCollecting} // Pass the isCollecting state to PidGraph
+                    setIsCollecting={setIsCollecting} // Pass the setIsCollecting function to PidGraph
+                />            </div>
         </div>
     );
 }
