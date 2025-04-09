@@ -110,7 +110,18 @@ export default function App() {
                     setFrameSize={setFrameSize}
                 />
             </div>
-            <div className="md:w-1/4 relative top-20 justify-center">
+            <div className="md:w-1/4 relative justify-center">
+                <div style={{fontSize: 12, textIndent: "2rem", textAlign: "justify", marginBottom: 50}}>
+                    <p>
+                        This is the <b>PID Simulator</b>, a fun and interactive tool designed to experiment with different PID (Proportional, Integral, Derivative) settings, frame sizes, and motor configurations. It allows you to visualize how these parameters affect the behavior of a quadcopter in real-time.
+                    </p>
+                    <p>
+                        The PID system in this simulator works similarly to the ones used in platforms like <b>Betaflight</b>, making it a great way to understand and tweak PID settings without needing a physical quadcopter.
+                    </p>
+                    <p>
+                        You are welcome to use this simulator for educational purposes, and I hope you find it as enjoyable as I do!
+                    </p>
+                </div>
                 <CopterView
                     pid={pid}
                     setAngle={setAngle}
