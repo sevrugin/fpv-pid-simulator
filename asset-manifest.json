@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/fpv-pid-simulator/static/css/main.be2a9824.css",
-    "main.js": "/fpv-pid-simulator/static/js/main.066db168.js",
+    "main.css": "/fpv-pid-simulator/static/css/main.4cfe0858.css",
+    "main.js": "/fpv-pid-simulator/static/js/main.16aa0c68.js",
     "static/js/453.84b1e314.chunk.js": "/fpv-pid-simulator/static/js/453.84b1e314.chunk.js",
     "index.html": "/fpv-pid-simulator/index.html",
-    "main.be2a9824.css.map": "/fpv-pid-simulator/static/css/main.be2a9824.css.map",
-    "main.066db168.js.map": "/fpv-pid-simulator/static/js/main.066db168.js.map",
+    "main.4cfe0858.css.map": "/fpv-pid-simulator/static/css/main.4cfe0858.css.map",
+    "main.16aa0c68.js.map": "/fpv-pid-simulator/static/js/main.16aa0c68.js.map",
     "453.84b1e314.chunk.js.map": "/fpv-pid-simulator/static/js/453.84b1e314.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.be2a9824.css",
-    "static/js/main.066db168.js"
+    "static/css/main.4cfe0858.css",
+    "static/js/main.16aa0c68.js"
   ]
 }
