@@ -1,3 +1,31 @@
+# PID Simulator
+
+This is the **PID Simulator**, a fun and interactive tool designed to experiment with different PID (Proportional, Integral, Derivative) settings, frame sizes, and motor configurations. It allows you to visualize how these parameters affect the behavior of a quadcopter in real-time.
+
+The PID system in this simulator works similarly to the ones used in platforms like **Betaflight**, making it a great way to understand and tweak PID settings without needing a physical quadcopter.
+
+You are welcome to use this simulator for educational purposes, and I hope you find it as enjoyable as I do!
+
+## Features
+- Adjust **P**, **I**, and **D** values using intuitive sliders.
+- Experiment with various **frame sizes** and **motor presets**.
+- Visualize the quadcopter's response to your settings in real-time.
+- See how corrections are applied to maintain stability.
+
+## Purpose
+This project was created just for fun and to provide a hands-on way to learn about PID tuning and quadcopter dynamics. Whether you're a beginner or an experienced pilot, this simulator offers a safe and engaging way to explore PID concepts.
+
+## How to Use
+1. Adjust the PID sliders to change the quadcopter's behavior.
+2. Select different motor types and frame sizes to see their impact.
+3. Use the arrow keys to start moving the quadcopter and observe the corrections applied.
+
+## Screenshot
+![Screenshot](img/img.png)
+
+## Getting Started
+Follow the instructions below to run the simulator locally or deploy it online.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
